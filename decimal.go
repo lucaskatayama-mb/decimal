@@ -1347,7 +1347,7 @@ func (d Decimal) MarshalJSON() ([]byte, error) {
 	if MarshalJSONWithoutQuotes {
 		str = d.StringFixed(JSONPrecision)
 	} else {
-		str = "\"" + d.String() + "\""
+		str = "\"" + d.StringFixed(JSONPrecision) + "\""
 	}
 	return []byte(str), nil
 }
