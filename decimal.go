@@ -44,6 +44,8 @@ import (
 //
 var DivisionPrecision = 16
 
+var JSONPrecision = int32(8)
+
 // MarshalJSONWithoutQuotes should be set to true if you want the decimal to
 // be JSON marshaled as a number, instead of as a string.
 // WARNING: this is dangerous for decimals with many digits, since many JSON
@@ -1343,7 +1345,7 @@ func (d *Decimal) UnmarshalJSON(decimalBytes []byte) error {
 func (d Decimal) MarshalJSON() ([]byte, error) {
 	var str string
 	if MarshalJSONWithoutQuotes {
-		str = d.String()
+		str = d.StringFixed(JSONPrecision)
 	} else {
 		str = "\"" + d.String() + "\""
 	}
@@ -1850,10 +1852,10 @@ var _tanP = [...]Decimal{
 }
 var _tanQ = [...]Decimal{
 	NewFromFloat(1.00000000000000000000e+0),
-	NewFromFloat(1.36812963470692954678e+4),  //0x40cab8a5eeb36572
-	NewFromFloat(-1.32089234440210967447e+6), //0xc13427bc582abc96
-	NewFromFloat(2.50083801823357915839e+7),  //0x4177d98fc2ead8ef
-	NewFromFloat(-5.38695755929454629881e+7), //0xc189afe03cbe5a31
+	NewFromFloat(1.36812963470692954678e+4),  // 0x40cab8a5eeb36572
+	NewFromFloat(-1.32089234440210967447e+6), // 0xc13427bc582abc96
+	NewFromFloat(2.50083801823357915839e+7),  // 0x4177d98fc2ead8ef
+	NewFromFloat(-5.38695755929454629881e+7), // 0xc189afe03cbe5a31
 }
 
 // Tan returns the tangent of the radian argument x.
